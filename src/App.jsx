@@ -6,11 +6,13 @@ import RequestWeb from "./pages/RequestWeb"
 import IndexRequest from "./pages/IndexRequest"
 import IndexGoods from "./pages/IndexGoods"
 import IndexEmployee from "./pages/IndexEmployee"
+import HomePage from "./pages/HomePage"
 
 function App() {
   return (
     <div className="App">
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/request" element={<IndexRequest />} />
           <Route path="/goods" element={<IndexGoods />} />

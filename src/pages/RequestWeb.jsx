@@ -25,10 +25,10 @@ import Swal from "sweetalert2"
 import { useNavigate } from "react-router"
 
 export default function RequestWeb() {
-  let loginUSer = JSON.parse(localStorage.getItem("payload")).role
+  const navigate = useNavigate()
+
   let payload = JSON.parse(localStorage.getItem("payload"))
 
-  const navigate = useNavigate()
   const handleLogout = () => {
     localStorage.removeItem("payload")
     navigate("/login")
@@ -112,8 +112,7 @@ export default function RequestWeb() {
   const handleChangeStatus = () => {
     axios
       .get(BaseHttp + "/request/change/" + changeStatus.id)
-      .then((data) =>{
-
+      .then((data) => {
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -121,9 +120,8 @@ export default function RequestWeb() {
           showConfirmButton: false,
           timer: 1500,
         })
-        setTrigger(trigger+1)
-      }
-      )
+        setTrigger(trigger + 1)
+      })
       .catch((err) => console.log(err))
   }
 
@@ -150,6 +148,7 @@ export default function RequestWeb() {
       })
     }
   }
+
 
   let newDate = ""
   new Date()
@@ -391,7 +390,7 @@ export default function RequestWeb() {
                     <div className="d-flex justify-content-between">
                       <div className="">Daftar Permintaan Barang</div>
                       <div className="fw-bold">
-                        {loginUSer === "admin" ? (
+                        {payload.role === "admin" ? (
                           ""
                         ) : (
                           <div className="d-flex  align-items-center fs-12">
@@ -450,12 +449,13 @@ export default function RequestWeb() {
                       <div className="border py-2" style={{ width: "10%" }}>
                         Status
                       </div>
-                      <div className="border py-2" style={{ width: "5%" }}>
-                      -
-                      </div>
+                      { payload.role === "admin" ?    <div className="border py-2" style={{ width: "5%" }}>
+                        -
+                      </div> : ""}
+                   
                     </div>
 
-                    {loginUSer === "admin"
+                    {payload.role === "admin"
                       ? request.length !== 0
                         ? request.map((e, i) => (
                             <div className="d-flex" key={i}>
@@ -538,42 +538,33 @@ export default function RequestWeb() {
                                 )}
                               </div>
                               <div
-                              className="border py-1 text-center  d-flex align-items-center justify-content-center text-danger"
-                              style={{ width: "5%" }}
-                              onClick={() =>
-                                Swal.fire({
-                                  title: "Are you sure?",
-                                  showCancelButton: true,
-                                  confirmButtonText: "Delete",
-                                  confirmButtonColor: "#DF826C",
-                                }).then((result) => {
-                                  if (result.isConfirmed) {
-                                    axios
-                                      .get(
-                                        BaseHttp +
-                                          "/request/delete/" +
-                                          e.id
-                                      )
-                                      .then(() =>
-                                        setTrigger(trigger + 1)
-                                      )
-                                      .catch((err) =>
-                                        console.log(err)
-                                      )
-                                    Swal.fire(
-                                      "Delete!",
-                                      "",
-                                      "success"
-                                    )
-                                  }
-                                })
-                              }
-                            >
-                              <CgTrash/>
-                            </div>
+                                className="border py-1 text-center  d-flex align-items-center justify-content-center text-danger"
+                                style={{ width: "5%" }}
+                                onClick={() =>
+                                  Swal.fire({
+                                    title: "Are you sure?",
+                                    showCancelButton: true,
+                                    confirmButtonText: "Delete",
+                                    confirmButtonColor: "#DF826C",
+                                  }).then((result) => {
+                                    if (result.isConfirmed) {
+                                      axios
+                                        .get(
+                                          BaseHttp + "/request/delete/" + e.id
+                                        )
+                                        .then(() => setTrigger(trigger + 1))
+                                        .catch((err) => console.log(err))
+                                      Swal.fire("Delete!", "", "success")
+                                    }
+                                  })
+                                }
+                              >
+                             
+                                <CgTrash />
+                              </div>
                             </div>
                           ))
-                        : ""
+                        : "Loading..."
                       : tabRequest === "individu"
                       ? requestPersonal.map((e, i) => (
                           <div className="d-flex" key={i}>
@@ -644,7 +635,6 @@ export default function RequestWeb() {
                                 </div>
                               )}
                             </div>
-                            
                           </div>
                         ))
                       : requestDiv.map((e, i) => (
@@ -719,7 +709,7 @@ export default function RequestWeb() {
                           </div>
                         ))}
 
-                    {!viewRequest && loginUSer !== "admin" ? (
+                    {!viewRequest && payload.role !== "admin" ? (
                       <div className="d-flex justify-content-end">
                         <div
                           className="mt-5 px-3 cp-bg-5 text-white py-2 rounded mb-3"
@@ -1046,8 +1036,6 @@ export default function RequestWeb() {
           </div>
         </div>
       </div>
-
-
 
       <div
         class="modal fade"

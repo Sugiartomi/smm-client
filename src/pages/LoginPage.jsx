@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { json, useNavigate } from "react-router"
 import Swal from "sweetalert2"
 import { BaseHttp } from ".."
@@ -18,6 +18,12 @@ export default function LoginPage() {
       setInput({ ...input, password: valueInput })
     }
   }
+
+  useEffect(() => {
+    if((localStorage.getItem("payload"))) {
+      navigate("/request")
+    }
+  }, [])
 
   const handleLogin = (event) => {
     event.preventDefault()

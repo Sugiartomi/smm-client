@@ -34,6 +34,7 @@ export default function GoodsMobile() {
     localStorage.removeItem("payload")
     navigate("/login")
     window.location.reload()
+    setViewSideBar(false)
   }
 
   const [viewSideBar, setViewSideBar] = useState(false)

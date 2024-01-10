@@ -618,7 +618,7 @@ export default function RequestMobile() {
                                   </div>
                                 </>
                               ))
-                            : ""
+                            : "Loading..."
                           : tabRequest === "individu"
                           ? requestPersonal.map((e, i) => (
                               <>
