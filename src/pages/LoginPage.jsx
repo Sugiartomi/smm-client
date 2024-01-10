@@ -2,6 +2,9 @@ import axios from "axios"
 import { useState } from "react"
 import { json, useNavigate } from "react-router"
 import Swal from "sweetalert2"
+import { BaseHttp } from ".."
+import logo from "../assets/logo-smm.jpg"
+import { CgLock, CgProfile } from "react-icons/cg"
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -36,7 +39,7 @@ export default function LoginPage() {
       })
     } else {
       axios
-        .post("http://localhost:8080/login", {
+        .post(BaseHttp + "/login", {
           nama: input.username,
           password: input.password,
         })
@@ -46,18 +49,19 @@ export default function LoginPage() {
             icon: "success",
             text: "Login Success",
             showConfirmButton: false,
-            timer: 800,
+            timer: 1500,
           })
 
           localStorage.setItem(
             "payload",
             JSON.stringify({
+              id: data.data.id,
               role: data.data.nama,
               department: data.data.departemen,
               NIK: data.data.NIK,
             })
           )
-          navigate("/dashboard")
+          navigate("/request")
         })
         .catch((err) => {
           if (err.response.data.message) {
@@ -66,7 +70,7 @@ export default function LoginPage() {
               icon: "error",
               text: err.response.data.message,
               showConfirmButton: false,
-              timer: 800,
+              timer: 1500,
             })
           }
         })
@@ -75,27 +79,59 @@ export default function LoginPage() {
 
   return (
     <>
-      <div className="container">
-        <div className="w-50">
-          <form action="" onSubmit={handleLogin}>
-            <div className="text-primary fw-bold">Username</div>
-            <input
-              type="text"
-              className="form-control shadow-none"
-              name="username"
-              onChange={handleInput}
-            />
-            <div className="text-primary fw-bold">Password</div>
-            <input
-              type="password"
-              className="form-control shadow-none"
-              name="password"
-              onChange={handleInput}
-            />
-            <button type="submit" className="btn btn-primary w-100 mt-4">
-              Login
-            </button>
-          </form>
+      <div className="container-fluid cp-bg-4" style={{ minHeight: "100vh" }}>
+        <div
+          className="d-flex align-items-center w-100  justify-content-center"
+          style={{ height: "100vh" }}
+        >
+          <div
+            className=" cp-bg-5"
+            style={{
+              padding: "100px 40px",
+              maxWidth: "10cm",
+              borderRadius: "25px",
+            }}
+          >
+            <img src={logo} className="img-fluid" alt="" />
+            <form action="" className="mt-4" onSubmit={handleLogin}>
+              <div className="text-white fw-bold mb-2">Username</div>
+              <div className="d-flex border bg-white" style={ { borderRadius : 30}}>
+                <div>
+                  <div
+                    className="rounded-circle cp-bg-1 d-flex align-items-center justify-content-center"
+                    style={{ width: 40, height: 40 }}
+                  > <CgProfile size={24}/> </div>
+                </div>
+                <input
+                  type="text"
+                  className="form-control shadow-none border-0"
+                  name="username"
+                  onChange={handleInput}
+                  style={ { borderRadius : 30}}
+                />
+              </div>
+              <div className="text-white fw-bold mb-2">Username</div>
+              <div className="d-flex border bg-white" style={ { borderRadius : 30}}>
+                <div>
+                  <div
+                    className="rounded-circle cp-bg-1 d-flex align-items-center justify-content-center"
+                    style={{ width: 40, height: 40 }}
+                  > <CgLock size={24}/> </div>
+                </div>
+                <input
+                  type="password"
+                  className="form-control shadow-none border-0"
+                  name="password"
+                  onChange={handleInput}
+                  style={ { borderRadius : 30}}
+                />
+              </div>
+        
+              <button type="submit" className="cp-bg-1 w-100 mt-4 border-0 text-white fw-bold" style={{ height : 50, borderRadius : 30}}>
+                Login
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </>

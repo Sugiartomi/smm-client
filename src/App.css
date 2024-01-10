@@ -1,0 +1,95 @@
+.fs-8 {
+  font-size: 8px;
+}
+.fs-10 {
+  font-size: 10px;
+}
+.fs-12 {
+  font-size: 12px;
+}
+.fs-14 {
+  font-size: 14px;
+}
+.fs-16 {
+  font-size: 16px;
+}
+.fs-18 {
+  font-size: 18px;
+}
+.fs-20 {
+  font-size: 20px;
+}
+.fs-22 {
+  font-size: 22px;
+}
+.fs-24 {
+  font-size: 24px;
+}
+.fs-26 {
+  font-size: 26px;
+}
+.fs-28 {
+  font-size: 28px;
+}
+.fs-30 {
+  font-size: 30px;
+}
+.fs-36 {
+  font-size: 36px;
+}
+.fs-40 {
+  font-size: 40px;
+}
+
+
+.cp-bg-1 {
+  background-color: #92C7CF;
+}
+.cp-bg-2 {
+  background-color: #AAD7D9;
+}
+.cp-bg-3 {
+  background-color: #FBF9F1;
+}
+.cp-bg-4 {
+  background-color: #E5E1DA;
+}
+.cp-bg-5 {
+  background-color: #4682A9;
+}
+.cp-bg-6 {
+  background-color: #61A3BA;
+}
+.cp-bg-green {
+  background-color: #43766C;
+}
+.cp-bg-yellow {
+  background-color: #EEC759;
+}
+.cp-bg-red {
+  background-color: #DF826C;
+}
+.cp-text-1 {
+  color: #92C7CF;
+}
+.cp-text-2 {
+  color: #AAD7D9;
+}
+.cp-text-3 {
+  color: #FBF9F1;
+}
+.cp-text-4 {
+  color: #E5E1DA;
+}
+.cp-text-5 {
+  color: #4682A9;
+}
+
+.fixed-navbar {
+  position: fixed;
+  max-width: 15cm;
+  bottom: 0;
+  background-color: white;
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 5px; */
+  z-index: 3;
+}
